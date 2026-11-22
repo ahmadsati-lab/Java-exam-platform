@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Java Programming 1 Exam Platform | 30 Questions Assessment</title>
+  <meta name="description" content="Interactive Java Programming 1 exam covering computers, Java fundamentals, operators, input/output streams, and decision-making statements." />
+  <meta name="robots" content="index, follow" />
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card: #1e293b;
+      --card-2: #0b1220;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #0284c7;
+      --success: #22c55e;
+      --danger: #ef4444;
+      --border: #334155;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 24px 16px 64px;
+    }
+    header {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px 24px;
+      margin-bottom: 24px;
+    }
+    header h1 {
+      margin: 0 0 6px;
+      font-size: 1.6rem;
+      color: var(--accent);
+    }
+    header p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+    .student-box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 20px;
+    }
+    .student-box label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+    .student-box input {
+      width: 100%;
+      padding: 10px 14px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--card-2);
+      color: var(--text);
+      font-size: 1rem;
+    }
+    .question-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px 20px;
+      margin-bottom: 16px;
+    }
+    .q-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+      font-size: 0.85rem;
+      color: var(--accent);
+      font-weight: 700;
+    }
+    .q-text {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+    pre.code-block {
+      background: var(--card-2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 14px;
+      overflow-x: auto;
+      color: #e2e8f0;
+      font-family: Consolas, Monaco, "Courier New", monospace;
+      font-size: 0.9rem;
+      margin: 0 0 14px;
+    }
+    .options {
+      display: grid;
+      gap: 10px;
+    }
+    .option-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--card-2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 12px;
+      cursor: pointer;
+      transition: border-color 0.15s ease;
+    }
+    .option-item:hover {
+      border-color: var(--accent);
+    }
+    .option-item input[type="radio"] {
+      accent-color: var(--accent);
+      transform: scale(1.1);
+    }
+    textarea.code-input {
+      width: 100%;
+      min-height: 150px;
+      background: var(--card-2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 14px;
+      color: #f8fafc;
+      font-family: Consolas, Monaco, "Courier New", monospace;
+      font-size: 0.92rem;
+      resize: vertical;
+    }
+    .actions {
+      display: flex;
+      justify-content: center;
+      margin-top: 24px;
+    }
+    button.submit-btn {
+      background: var(--accent);
+      color: #061220;
+      border: none;
+      border-radius: 10px;
+      padding: 14px 32px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    button.submit-btn:hover {
+      background: var(--accent-hover);
+      color: #fff;
+    }
+    button.submit-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    #resultBox {
+      display: none;
+      background: var(--card);
+      border: 2px solid var(--accent);
+      border-radius: 14px;
+      padding: 24px;
+      margin-top: 28px;
+    }
+    .score-summary {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    .status-badge {
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+    .ok {
+      background: rgba(34, 197, 94, 0.18);
+      color: var(--success);
+    }
+    .bad {
+      background: rgba(239, 68, 68, 0.18);
+      color: var(--danger);
+    }
+    .details-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .detail-item {
+      background: var(--card-2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <header>
+      <h1>Java Programming 1 — Exam</h1>
+      <p>30 Questions (29 Multiple Choice / Code Analysis &amp; Debugging + 1 Java Coding Task). Your score is shown immediately upon submission.</p>
+    </header>
+
+    <section class="student-box">
+      <label for="studentName">Student Name</label>
+      <input type="text" id="studentName" name="studentName" maxlength="80" placeholder="Enter your full name" required />
+    </section>
+
+    <form id="examForm">
+      <div id="questionsContainer">Loading questions...</div>
+      <div class="actions">
+        <button type="submit" id="submitBtn" class="submit-btn">Submit Exam &amp; Show Result</button>
+      </div>
+    </form>
+
+    <section id="resultBox" aria-live="polite">
+      <h2>Exam Result</h2>
+      <div id="scoreSummary" class="score-summary"></div>
+      <div id="detailsList" class="details-list"></div>
+    </section>
+  </main>
+
+  <script>
+    let loadedQuestions = [];
+
+    function escapeHtml(str) {
+      const div = document.createElement("div");
+      div.textContent = str ?? "";
+      return div.innerHTML;
+    }
+
+    async function loadExam() {
+      const container = document.getElementById("questionsContainer");
+      try {
+        const res = await fetch("/api/questions");
+        const data = await res.json();
+        if (!res.ok || !Array.isArray(data.questions)) {
+          container.textContent = data.error || "Unable to load questions.";
+          return;
+        }
+        loadedQuestions = data.questions;
+        container.innerHTML = "";
+
+        loadedQuestions.forEach((q, idx) => {
+          const card = document.createElement("article");
+          card.className = "question-card";
+          card.id = `q-card-${q.id}`;
+
+          const typeLabel = q.type === "write_code" ? "Coding Task" : "Multiple Choice";
+          let html = `
+            <div class="q-header">
+              <span>Question ${idx + 1} of ${loadedQuestions.length}</span>
+              <span>${escapeHtml(typeLabel)}</span>
+            </div>
+            <div class="q-text">${escapeHtml(q.question)}</div>
+          `;
+
+          if (q.code && q.code.trim() !== "") {
+            html += `<pre class="code-block"><code>${escapeHtml(q.code)}</code></pre>`;
+          }
+
+          if (q.type === "mcq" && Array.isArray(q.options)) {
+            html += `<div class="options">`;
+            q.options.forEach((opt, optIdx) => {
+              const inputId = `q_${q.id}_opt_${optIdx}`;
+              html += `
+                <label class="option-item" for="${inputId}">
+                  <input type="radio" id="${inputId}" name="q_${q.id}" value="${escapeHtml(opt)}" />
+                  <span>${escapeHtml(opt)}</span>
+                </label>
+              `;
+            });
+            html += `</div>`;
+          } else if (q.type === "write_code") {
+            html += `
+              <textarea class="code-input" id="code_${q.id}" name="q_${q.id}" placeholder="Write your Java code here..."></textarea>
+            `;
+          }
+
+          card.innerHTML = html;
+          container.appendChild(card);
+        });
+      } catch (err) {
+        container.textContent = "Network error while loading exam.";
+      }
+    }
+
+    document.getElementById("examForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const submitBtn = document.getElementById("submitBtn");
+      const studentName = document.getElementById("studentName").value.trim();
+
+      if (!studentName) {
+        alert("Please enter your name before submitting.");
+        document.getElementById("studentName").focus();
+        return;
+      }
+
+      const answers = {};
+      loadedQuestions.forEach((q) => {
+        if (q.type === "mcq") {
+          const checked = document.querySelector(`input[name="q_${q.id}"]:checked`);
+          answers[String(q.id)] = checked ? checked.value : "";
+        } else if (q.type === "write_code") {
+          const ta = document.getElementById(`code_${q.id}`);
+          answers[String(q.id)] = ta ? ta.value : "";
+        }
+      });
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Submitting...";
+
+      try {
+        const res = await fetch("/api/submit", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ student_name: studentName, answers }),
+        });
+        const result = await res.json();
+
+        if (!res.ok) {
+          alert(result.error || "Failed to submit exam.");
+          submitBtn.disabled = false;
+          submitBtn.textContent = "Submit Exam & Show Result";
+          return;
+        }
+
+        const resultBox = document.getElementById("resultBox");
+        const scoreSummary = document.getElementById("scoreSummary");
+        const detailsList = document.getElementById("detailsList");
+
+        scoreSummary.textContent = `${result.student_name}: ${result.score} / ${result.total} (${result.percentage}%)`;
+        detailsList.innerHTML = "";
+
+        (result.details || []).forEach((d) => {
+          const item = document.createElement("div");
+          item.className = "detail-item";
+          item.innerHTML = `
+            <span>Q${escapeHtml(String(d.id))}</span>
+            <span class="status-badge ${d.correct ? "ok" : "bad"}">${d.correct ? "Correct" : "Incorrect"}</span>
+          `;
+          detailsList.appendChild(item);
+        });
+
+        resultBox.style.display = "block";
+        resultBox.scrollIntoView({ behavior: "smooth" });
+        submitBtn.textContent = "Submitted";
+      } catch (err) {
+        alert("Network error while submitting exam.");
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Submit Exam & Show Result";
+      }
+    });
+
+    loadExam();
+  </script>
+</body>
+</html>
